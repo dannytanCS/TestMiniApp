@@ -60,7 +60,7 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //previewLayer!.frame  = ImageView.bounds
+        previewLayer!.frame  = ImageView.bounds
         
     }
     
@@ -110,7 +110,7 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                     var imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                     
                     var dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    var cgImageRef = CGImageCreateWithPNGDataProvider(dataProvider, nil, true, .RenderingIntentDefault)
+                    var cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, .RenderingIntentDefault)
                     //images we want to store
                     var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: .Right)
                     self.ImageView.image = image
