@@ -112,6 +112,8 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                     
                     var dataProvider = CGDataProviderCreateWithCFData(imageData)
                     var cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
+
+               
                     //images we want to store
                     var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: .Right)
                     
