@@ -38,29 +38,32 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        addImageToFirebase(image!)
+        self.nextScreenButton.hidden = false
+
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func addImageToFirebase(image: UIImage)
+    {
         let storage = FIRStorage.storage()
         let storageRef = storage.referenceForURL("gs://facebooklogin-50952.appspot.com")
-        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        ImageView.image = image
-        
         let imageName = NSUUID().UUIDString
         let profilePicRef = storageRef.child(self.user!.uid+"/\(imageName).jpg")
         self.captureSession?.stopRunning()
-        self.nextScreenButton.hidden = false
-        if let uploadData = UIImageJPEGRepresentation(image!, 0){
+        if let uploadData = UIImageJPEGRepresentation(image, 0){
             profilePicRef.putData(uploadData, metadata: nil, completion: { (meta, error) in
                 if error != nil {
                     print (error)
                 }
             })
         }
-
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //previewLayer!.frame  = ImageView.bounds
+        previewLayer!.frame  = ImageView.bounds
         
     }
     
@@ -98,9 +101,7 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
     }
     
-    @IBAction func takePicture(sender: AnyObject) {
-        let storage = FIRStorage.storage()
-        let storageRef = storage.referenceForURL("gs://cameraapp-26c67.appspot.com")
+    @IBAction func takePic(sender: AnyObject) {
         if let videoConnection = stillImageOutput?.connectionWithMediaType(AVMediaTypeVideo){
             videoConnection.videoOrientation = AVCaptureVideoOrientation.Portrait
             stillImageOutput?.captureStillImageAsynchronouslyFromConnection(videoConnection, completionHandler: {
@@ -110,29 +111,22 @@ class CamViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                     var imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                     
                     var dataProvider = CGDataProviderCreateWithCFData(imageData)
-                    var cgImageRef = CGImageCreateWithPNGDataProvider(dataProvider, nil, true, .RenderingIntentDefault)
+                    var cgImageRef = CGImageCreateWithJPEGDataProvider(dataProvider, nil, true, CGColorRenderingIntent.RenderingIntentDefault)
                     //images we want to store
                     var image = UIImage(CGImage: cgImageRef!, scale: 1.0, orientation: .Right)
-                    self.ImageView.image = image
-                    let imageName = NSUUID().UUIDString
-                    let profilePicRef = storageRef.child(self.user!.uid+"/\(imageName).jpg")
-                    self.captureSession?.stopRunning()
-                    self.nextScreenButton.hidden = false
-                    if let uploadData = UIImageJPEGRepresentation(image, 0){
-                        profilePicRef.putData(uploadData, metadata: nil, completion: { (meta, error) in
-                            if error != nil {
-                                print (error)
-                            }
-                        })
-                    }
+                    
+                    self.addImageToFirebase(image)
+                    
                 }
             })
         }
-        
     }
+    
+
     @IBAction func nextScreen(sender: AnyObject) {
     }
     
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
