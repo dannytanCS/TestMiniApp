@@ -103,7 +103,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJC-JR-i0k">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJC-JR-i0k">
                                 <rect key="frame" x="0.0" y="28" width="375" height="517"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBM-eJ-yi1">
@@ -111,13 +111,7 @@
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="nextScreen:" destination="J5b-2n-ekk" eventType="touchUpInside" id="huJ-Tp-HKa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qv-vV-gjm">
-                                <rect key="frame" x="145" y="617" width="85" height="30"/>
-                                <state key="normal" title="Take Picture"/>
-                                <connections>
-                                    <action selector="takePicture:" destination="J5b-2n-ekk" eventType="touchUpInside" id="HfE-3T-4Rj"/>
+                                    <segue destination="JnS-9T-okD" kind="show" id="q1P-IQ-0gq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-p4-lNt">
@@ -127,19 +121,22 @@
                                     <action selector="chooseFromLibrary:" destination="J5b-2n-ekk" eventType="touchUpInside" id="sUd-ug-01u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8O-zF-FAJ">
+                                <rect key="frame" x="164" y="617" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="takePic:" destination="J5b-2n-ekk" eventType="touchUpInside" id="NvN-ft-kmN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3qv-vV-gjm" firstAttribute="centerX" secondItem="rGs-AN-HCR" secondAttribute="centerX" id="3c8-dI-vTX"/>
-                            <constraint firstItem="HVV-n1-n2J" firstAttribute="top" secondItem="3qv-vV-gjm" secondAttribute="bottom" constant="20" id="6Rk-26-wyB"/>
                             <constraint firstItem="BBM-eJ-yi1" firstAttribute="trailing" secondItem="rGs-AN-HCR" secondAttribute="trailingMargin" id="7iJ-gx-LwI"/>
                             <constraint firstItem="VJC-JR-i0k" firstAttribute="top" secondItem="NQv-QP-IoE" secondAttribute="bottom" constant="8" id="84g-nU-4SJ"/>
-                            <constraint firstItem="3qv-vV-gjm" firstAttribute="top" secondItem="VJC-JR-i0k" secondAttribute="bottom" constant="72" id="AwG-Mx-vd0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="VJC-JR-i0k" secondAttribute="trailing" constant="-20" id="IPf-oo-G0E"/>
                             <constraint firstItem="Kne-p4-lNt" firstAttribute="leading" secondItem="rGs-AN-HCR" secondAttribute="leadingMargin" id="bdF-sn-m7n"/>
                             <constraint firstItem="HVV-n1-n2J" firstAttribute="top" secondItem="Kne-p4-lNt" secondAttribute="bottom" constant="20" id="ciE-ol-4YB"/>
                             <constraint firstItem="VJC-JR-i0k" firstAttribute="centerX" secondItem="rGs-AN-HCR" secondAttribute="centerX" id="eMW-WR-CZd"/>
-                            <constraint firstItem="BBM-eJ-yi1" firstAttribute="leading" secondItem="3qv-vV-gjm" secondAttribute="trailing" constant="99" id="fda-Zs-5lP"/>
                             <constraint firstItem="VJC-JR-i0k" firstAttribute="leading" secondItem="rGs-AN-HCR" secondAttribute="leadingMargin" constant="-20" id="haX-gS-Ijs"/>
                             <constraint firstItem="HVV-n1-n2J" firstAttribute="top" secondItem="BBM-eJ-yi1" secondAttribute="bottom" constant="20" id="lJI-YD-Y4K"/>
                         </constraints>
@@ -148,12 +145,30 @@
                     <connections>
                         <outlet property="ImageView" destination="VJC-JR-i0k" id="IGq-cp-KHG"/>
                         <outlet property="nextScreenButton" destination="BBM-eJ-yi1" id="gSs-dO-NM9"/>
-                        <outlet property="takePictureButton" destination="3qv-vV-gjm" id="udt-aO-ZiJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BpY-k9-reI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1439.5" y="264.5"/>
+            <point key="canvasLocation" x="1503.5" y="264.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2iS-4e-6sb">
+            <objects>
+                <viewController id="JnS-9T-okD" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="I6I-au-fnZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="RRP-pg-I1O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wqh-nG-heu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rpZ-et-Abb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968.5" y="276.5"/>
         </scene>
     </scenes>
 </document>
